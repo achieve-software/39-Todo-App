@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;
+}
+#container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.item {
+  border: 1px solid black;
+  border-radius: 30px;
+  width: 20%;
+  height: 20vh;
+  background-color: gainsboro;
+}
+h1 {
+  padding-bottom: 0.6rem;
+}
+
+input {
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+}
+button {
+  padding: 0.5rem;
+  background-color: red;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
