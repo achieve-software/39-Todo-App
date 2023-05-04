@@ -1,8 +1,13 @@
+//ELEMENTLERİ SEÇTİM
 const todoInput = document.getElementById("todo-input");
 const addBtn = document.querySelector("#todo-button");
 const todoUl = document.querySelector("#todo-ul");
-let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
 
+//LOCAL STORAGEDEN TODOLİSTİ ÇEKTİM
+let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
+//Bu kod, "todoList" adlı bir diziyi tarayıcının yerel depolama (local storage) alanından alır veya eğer bu dizinin depolanmamış olması durumunda boş bir dizi oluşturur.
+
+//SAYFA İLK YUKLENDİĞİNDE TODOLİST DİZİSİNİ TEK TEK GEZİP createTodo METODUNU ÇALIŞTIRIP HER BİR Lİ Yİ UL YE YÜKLEDİM
 window.addEventListener("load", () => {
   getTodoListFromLocalStorage();
 });
@@ -12,6 +17,8 @@ const getTodoListFromLocalStorage = () => {
   });
 };
 
+//ADD BUTONUNA TIKLADIĞIMIZDA OLAN OLAYLAR
+// preventDefault() yöntemi, bu butonun tıklanması durumunda varsayılan form gönderme işlemini engellemek için kullanılır. Bu kod örneği, bir HTML formundaki "submit" düğmesinin tıklanması durumunda sayfanın yeniden yüklenmesini ve form verilerinin sunucuya gönderilmesini engeller.
 addBtn.addEventListener("click", (e) => {
   e.preventDefault();
   if (todoInput.value.trim() === "") {
@@ -23,10 +30,12 @@ addBtn.addEventListener("click", (e) => {
     completed: false,
     text: todoInput.value,
   };
+
   createTodo(newTodo);
   todoList.push(newTodo);
   localStorage.setItem("todoList", JSON.stringify(todoList));
   e.target.closest("form").reset();
+  //e.target.closest("form").reset(); bir HTML formu gönderildikten sonra formun tüm alanlarının sıfırlanması için kullanılır. Bu şekilde, formun tekrar kullanıma hazır hale getirilmesi sağlanır ve kullanıcıların yeni verileri kolayca girmesi mümkün olur.
 });
 const createTodo = (newTodo) => {
   const { id, completed, text } = newTodo;
@@ -35,10 +44,10 @@ const createTodo = (newTodo) => {
   li.setAttribute("id", id);
 
   completed ? li.classList.add("checked") : "";
+  //completed değişkeninin doğruluğu (true veya false değeri) kontrol edilir. Eğer completed doğruysa (true), liye "checked" adlı bir CSS sınıfı eklenir.Eğer completed yanlışsa (false), herhangi bir işlem yapılmaz ("").
 
   const icon = document.createElement("i");
   icon.setAttribute("class", "fas fa-check");
-
   li.appendChild(icon);
 
   const p = document.createElement("p");
@@ -55,6 +64,7 @@ todoUl.addEventListener("click", (e) => {
   const idAttr = e.target.closest("li").getAttribute("id");
   if (e.target.classList.contains("fa-check")) {
     e.target.parentElement.classList.toggle("checked");
+    //Bu kod satırı, tıklanan öğenin ebeveyn "li" öğesine "checked" sınıfını ekler veya kaldırır.e.target tıklanan öğeyi temsil eder. parentElement özelliği, tıklanan öğenin doğrudan ebeveyn öğesini temsil eder, bu durumda tıklanan öğe bir tik işareti olduğundan ebeveyn "li" öğesi olacaktır.toggle() yöntemi, bir sınıfı öğede varsa kaldırır veya yoksa ekler.Böylece bu satır, tıklanan öğenin ebeveyn "li" öğesinde "checked" sınıfını ekler veya kaldırarak, kullanıcıya bu öğenin tamamlandığını veya tamamlanmadığını görsel olarak gösterir.
 
     todoList.forEach((todo) => {
       if (todo.id == idAttr) {
