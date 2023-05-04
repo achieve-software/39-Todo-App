@@ -7,7 +7,7 @@ const todoUl = document.querySelector("#todo-ul");
 let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
 //Bu kod, "todoList" adlı bir diziyi tarayıcının yerel depolama (local storage) alanından alır veya eğer bu dizinin depolanmamış olması durumunda boş bir dizi oluşturur.
 
-//SAYFA İLK YUKLENDİĞİNDE TODOLİST DİZİSİNİ TEK TEK GEZİP createTodo METODUNU ÇALIŞTIRIP HER BİR Lİ Yİ UL YE YÜKLEDİM
+//SAYFA İLK YUKLENDİĞİNDE TODOLİST DİZİSİNİ TEK TEK GEZİP createTodo METODUNU ÇALIŞTIRIP HER BİR Lİ Yİ UL YE YÜKLEDİM.
 window.addEventListener("load", () => {
   getTodoListFromLocalStorage();
 });
